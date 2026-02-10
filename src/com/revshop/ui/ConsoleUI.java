@@ -87,8 +87,33 @@ public class ConsoleUI {
             System.out.println("Invalid Email. Please enter a valid email address (e.g., user@example.com).");
         }
 
-        System.out.print("Enter Password: ");
-        String password = scanner.nextLine();
+        String password;
+        while (true) {
+            System.out.println("Enter Password (at least 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 symbol): ");
+            password = scanner.nextLine();
+            
+            if (password.length() < 8) {
+                System.out.println("Password must be at least 8 characters long.");
+                continue;
+            }
+            if (!password.matches(".*[A-Z].*")) {
+                System.out.println("Password must contain at least one uppercase letter.");
+                continue;
+            }
+            if (!password.matches(".*[a-z].*")) {
+                System.out.println("Password must contain at least one lowercase letter.");
+                continue;
+            }
+            if (!password.matches(".*\\d.*")) {
+                System.out.println("Password must contain at least one digit.");
+                continue;
+            }
+            if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*")) {
+                System.out.println("Password must contain at least one symbol (!@#$%^&* etc).");
+                continue;
+            }
+            break;
+        }
 
         String name;
         while (true) {
